@@ -4,6 +4,7 @@ from sqlalchemy.dialects.postgresql import JSONB
 from database import Base
 import os
 
+
 class Student(Base):
     __tablename__ = "students"
 

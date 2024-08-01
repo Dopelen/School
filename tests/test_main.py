@@ -11,12 +11,14 @@ from random import randint, choice
 from main import app
 from database import engine, SessionLocal, Base
 
+
 @pytest.fixture(scope="session")
 def test_db():
     """Создание тестовой базы данных и очистка после выполнения всех тестов"""
     Base.metadata.create_all(bind=engine)
     yield
     Base.metadata.drop_all(bind=engine)
+
 
 @pytest.fixture(scope="function")
 def db_session(test_db):
@@ -28,6 +30,7 @@ def db_session(test_db):
     session.close()
     transaction.rollback()
     connection.close()
+
 
 @pytest.fixture(scope="function")
 def client(db_session):
@@ -56,7 +59,9 @@ def test_database_connection(test_db):
         conn.execute(text("DROP TABLE IF EXISTS test_table;"))
         print("Table dropped.")
 
+
 faker = Faker()
+
 
 def generate_random_student_data():
     """Функция - генератор базовых тестовых полей"""
@@ -68,8 +73,10 @@ def generate_random_student_data():
         "subjects": {faker.word(): randint(1, 5) for _ in range(randint(1, 5))}
     }
 
+
 def calculate_average_score(subjects):
     return sum(subjects.values()) / len(subjects)
+
 
 @pytest.mark.parametrize(
     "student_data",
@@ -83,6 +90,7 @@ def test_create_student(student_data, client):
     assert data["last_name"] == student_data["last_name"]
     assert round(data["average_score"], 2) == round(calculate_average_score(student_data["subjects"]), 2)
 
+
 def test_create_student_invalid_first_name(client):
     """Тест проверяющий длину поля ввода имени"""
     invalid_data = {
@@ -94,6 +102,7 @@ def test_create_student_invalid_first_name(client):
     response = client.post("/students/", json=invalid_data)
     assert response.status_code == 422
     assert response.json()["detail"][0]["msg"] == "String should have at most 50 characters"
+
 
 def test_create_student_invalid_last_name(client):
     """Тест проверяющий длину поля ввода фамилии"""
@@ -107,6 +116,7 @@ def test_create_student_invalid_last_name(client):
     assert response.status_code == 422
     assert response.json()["detail"][0]["msg"] == "String should have at most 50 characters"
 
+
 def test_create_student_invalid_grade_more(client):
     """Тест проверяющий значение поля ввода класса (выше границы)"""
     invalid_data = {
@@ -118,6 +128,7 @@ def test_create_student_invalid_grade_more(client):
     response = client.post("/students/", json=invalid_data)
     assert response.status_code == 422
     assert response.json()["detail"][0]["msg"] == "Input should be less than or equal to 12"
+
 
 def test_create_student_invalid_grade_less(client):
     """Тест проверяющий значение поля ввода класса (ниже границы)"""

@@ -5,7 +5,6 @@ from sqlalchemy.orm import sessionmaker
 from config import Config, TestConfig
 import os
 
-
 if os.getenv("TEST_ENV"):
     config = TestConfig()
 else:
@@ -14,6 +13,7 @@ else:
 engine = create_engine(config.DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
+
 
 def get_db():
     db = SessionLocal()
