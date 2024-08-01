@@ -8,9 +8,13 @@ from sqlalchemy import text, create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from random import randint, choice
+import sys
+import os
+
+sys.path.append(os.path.join(os.path.dirname(__file__), '../src'))
+
 from main import app
 from database import engine, SessionLocal, Base
-
 
 @pytest.fixture(scope="session")
 def test_db():
