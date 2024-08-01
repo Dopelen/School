@@ -67,7 +67,7 @@ python -m venv venv
 venv\Scripts\activate
 ```
 
-- Установите зависимости:
+- Перейдите в корневую папку проекта "School" и установите зависимости:
 ```bash
 pip install -r requirements.txt
 ```
