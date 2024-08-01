@@ -63,7 +63,7 @@ git clone https://github.com/Dopelen/School
 - Создайте виртуальное окружение и активируйте его:
 ```bash
 python -m venv venv
-source venv/bin/activate  # Для Windows
+# Для Windows перейдите в папку venv -> Scripts -> activate
 venv\Scripts\activate
 ```
 
