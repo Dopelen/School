@@ -72,7 +72,7 @@ venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-- Установите путь к базе данных в файле config.py
+- Установите путь к своей базе данных в файле config.py
 
 - Запустите приложение:
 ```bash
