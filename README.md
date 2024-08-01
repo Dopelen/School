@@ -79,8 +79,8 @@ pip install -r requirements.txt
 uvicorn main:app --reload
 ```
 
-- Запустите тесты:
+- Запустите тесты из корневой папки *School*
 ```bash
-pytest
+pytest tests 
 ```
 
