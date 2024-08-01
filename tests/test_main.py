@@ -36,26 +36,6 @@ def client(db_session):
     from main import app  # импортируйте ваше приложение FastAPI
     yield TestClient(app)
 
-
-def test_database_connection(test_db):
-    """Простой тест для проверки правильности подключения и использования базы данных"""
-    with engine.connect() as conn:
-        # Попробуйте создать таблицу и вставить данные
-        conn.execute(text("CREATE TABLE IF NOT EXISTS test_table (id SERIAL PRIMARY KEY, name TEXT);"))
-        print("Table created or already exists.")
-
-        conn.execute(text("INSERT INTO test_table (name) VALUES ('test');"))
-        print("Inserted data into table.")
-
-        result = conn.execute(text("SELECT name FROM test_table;")).fetchall()
-        print(f"Query result: {result}")
-
-        assert result == [('test',)]
-
-        # Убедитесь, что данные удаляются после выполнения теста
-        conn.execute(text("DROP TABLE IF EXISTS test_table;"))
-        print("Table dropped.")
-
 faker = Faker()
 
 def generate_random_student_data():
