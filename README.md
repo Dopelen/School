@@ -74,7 +74,7 @@ pip install -r requirements.txt
 
 - Установите путь к своей базе данных в файле config.py
 
-- Запустите приложение:
+- Запустите приложение из папки School/src:
 ```bash
 uvicorn main:app --reload
 ```
